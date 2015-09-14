@@ -113,7 +113,7 @@ def tsplot_robust(df, time, unit, condition, value, ci=95,
     if len(df) == 0:
         raise Exception('Unable to plot empty dataframe')
     if len(n_pivot) == 1:
-        ax = sns.barplot(condition, y=value, data=df, ci=CI)
+        ax = sns.barplot(condition, y=value, data=df, ci=ci)
     elif len(n_pivot) == sum(n_pivot.duplicated()) + 1:
         ax = sns.tsplot(df, time=time, condition=condition,
                         unit=unit, value=value, ci=ci)
