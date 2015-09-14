@@ -75,6 +75,13 @@ def dirichlet_mode(x):
 
 #---------- Plotting ---------
 
+import numpy as np
+import pandas as pd
+import matplotlib as mpl
+mpl.use('Agg')
+from matplotlib import pyplot as plt
+import seaborn as sns
+
 def savefig(ax, name):
     """Save the current figure taking into account legends."""
     lgd = ax.legend()
