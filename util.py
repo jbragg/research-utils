@@ -137,3 +137,34 @@ def tsplot_robust(df, time, unit, condition, value, ci=95,
     if logx:
         plt.xscale('log')
     return ax, df_stat
+
+#-----------  Multiprocessing -------
+
+import traceback
+
+def init_worker():
+    """Function to make sure everyone happily exits on KeyboardInterrupt
+
+    See https://stackoverflow.com/questions/1408356/
+    keyboard-interrupts-with-pythons-multiprocessing-pool
+    """
+    import signal
+    signal.signal(signal.SIGINT, signal.SIG_IGN)
+
+def run_functor(functor, x):
+    """
+    Given a no-argument functor, run it and return its result. We can
+    use this with multiprocessing.map and map it over a list of job
+    functors to do them.
+
+    Handles getting more than multiprocessing's pitiful exception output
+
+    https://stackoverflow.com/questions/6126007/
+    python-getting-a-traceback-from-a-multiprocessing-process
+    """
+    try:
+        # This is where you do your actual work
+        return functor(x)
+    except:
+        # Put all exception text into an exception and raise that
+        raise Exception("".join(traceback.format_exception(*sys.exc_info())))
