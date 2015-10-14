@@ -5,6 +5,7 @@ General utilities
 """
 
 import os
+import sys
 
 def get_or_default(d, k, default_v):
     try:
@@ -141,6 +142,8 @@ def tsplot_robust(df, time, unit, condition, value, ci=95,
 #-----------  Multiprocessing -------
 
 import traceback
+import multiprocessing as mp
+import re
 
 def init_worker():
     """Function to make sure everyone happily exits on KeyboardInterrupt
@@ -168,3 +171,19 @@ def run_functor(functor, x):
     except:
         # Put all exception text into an exception and raise that
         raise Exception("".join(traceback.format_exception(*sys.exc_info())))
+
+def cpu_count():
+    """Return number of cpus respecting numactl restrictions.
+
+    Never exceeds number of cpus specified by mp.cpu_count().
+
+    """
+    try:
+        m = re.search(r'(?m)^Cpus_allowed:\s*(.*)$',
+                      open('/proc/self/status').read())
+        if m:
+            res = bin(int(m.group(1).replace(',', ''), 16)).count('1')
+            if res > 0:
+                return min(res, mp.cpu_count())
+    except IOError:
+        return mp.cpu_count()
