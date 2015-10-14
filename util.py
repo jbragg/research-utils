@@ -150,6 +150,7 @@ def init_worker():
 
     See https://stackoverflow.com/questions/1408356/
     keyboard-interrupts-with-pythons-multiprocessing-pool
+
     """
     import signal
     signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -164,6 +165,7 @@ def run_functor(functor, x):
 
     https://stackoverflow.com/questions/6126007/
     python-getting-a-traceback-from-a-multiprocessing-process
+
     """
     try:
         # This is where you do your actual work
