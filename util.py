@@ -73,6 +73,35 @@ assert dbeta(0.6, 2, 2) != 0
 def dirichlet_mode(x):
     return [(v - 1) / (sum(x) - len(x)) for v in x]
 
+def beta_fit(mode, mag):
+    """Return parameters for beta distribution with given mode.
+
+    Solves a system of linear equations to find alpha and beta s.t.
+    alpha + beta = mag;
+    (alpha - 1) / (alpha + beta - 2) = mode.
+
+    Args:
+        mode:  Mode of desired beta distribution.
+        mag:   Magnitude of alpha + beta.
+
+    Returns:
+        x: Numpy array of [alpha, beta]
+
+    >>> beta_fit(0.1, 7)
+    array([ 1.5,  5.5])
+    >>> beta_fit(0.2, 7)
+    array([ 2.,  5.])
+    >>> beta_fit(0.3, 7)
+    array([ 2.5,  4.5])
+
+    """
+    a = np.array([[mode - 1, mode],
+                  [1, 1]])
+    b = np.array([2 * mode  - 1, mag])
+    x = np.linalg.solve(a, b)
+    return x
+
+
 
 #---------- Plotting ---------
 
