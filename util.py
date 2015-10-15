@@ -218,3 +218,30 @@ def cpu_count():
                 return min(res, mp.cpu_count())
     except IOError:
         return mp.cpu_count()
+
+
+#-----------  I/O ------------------
+import cPickle as pickle
+
+def save_object(obj, filename):
+    """
+    Uses cPickle module to save the object to specified file name
+    """
+    try:
+        f = file(filename, 'wb')
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+        f.close()   
+    except IOError:
+        raise
+
+def load_object(filename):
+    """
+    Uses the cPickle module to load a saved object
+    """
+    try:
+        f = file(filename, 'rb')
+        obj = pickle.load(f)
+        f.close()
+        return obj
+    except IOError:
+        raise
