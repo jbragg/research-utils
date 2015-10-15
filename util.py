@@ -208,6 +208,9 @@ def cpu_count():
 
     Never exceeds number of cpus specified by mp.cpu_count().
 
+    Based on code from https://stackoverflow.com/questions/1006289/
+    how-to-find-out-the-number-of-cpus-using-python.
+
     """
     try:
         m = re.search(r'(?m)^Cpus_allowed:\s*(.*)$',
@@ -216,6 +219,7 @@ def cpu_count():
             res = bin(int(m.group(1).replace(',', ''), 16)).count('1')
             if res > 0:
                 return min(res, mp.cpu_count())
+        return mp.cpu_count()
     except IOError:
         return mp.cpu_count()
 
