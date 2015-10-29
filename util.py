@@ -4,6 +4,7 @@ General utilities
 
 """
 
+from __future__ import division
 import os
 import sys
 
@@ -54,6 +55,19 @@ def last_true(lst, f):
         return lst[-1 * len(els):]
     else:
         return []
+
+def midpoints(start, end, n):
+    """Return midpoints of n even-distributed buckets in [start, end].
+
+    >>> midpoints(0.5, 1, 2)
+    [0.625, 0.875]
+    >>> [round(x, 10) for x in midpoints(0.5, 1, 5)]
+    [0.55, 0.65, 0.75, 0.85, 0.95]
+
+    """
+    import numpy as np
+    endpoints = np.linspace(start, end, n + 1)
+    return [(x+y)/2 for x, y in zip(endpoints[:-1], endpoints[1:])]
 
 
 #--------- Statistics ------
