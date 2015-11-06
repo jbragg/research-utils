@@ -115,7 +115,23 @@ def beta_fit(mode, mag):
     x = np.linalg.solve(a, b)
     return x
 
+def truncnorm_sample(lower, upper, mu, std, size=1):
+    """Sample from a truncated normal distribution.
 
+    More intuitive version of scipy truncnorm function.
+
+    Args:
+        lower:  Lower bound.
+        uppper: Upper bound.
+        mu:     Mean.
+        std:    Standard deviation.
+        size:   Number of samples.
+
+    Returns: Numpy array.
+
+    """
+    return ss.truncnorm.rvs((lower - mu) / std, (upper - mu) / std,
+                            loc=mu, scale=std, size=size)
 
 #---------- Plotting ---------
 
