@@ -130,8 +130,11 @@ def truncnorm_sample(lower, upper, mu, std, size=1):
     Returns: Numpy array.
 
     """
-    return ss.truncnorm.rvs((lower - mu) / std, (upper - mu) / std,
-                            loc=mu, scale=std, size=size)
+    if std == 0:
+        return np.array([mu for _ in xrange(size)])
+    else:
+        return ss.truncnorm.rvs((lower - mu) / std, (upper - mu) / std,
+                                loc=mu, scale=std, size=size)
 
 #---------- Plotting ---------
 
