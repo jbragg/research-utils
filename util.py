@@ -147,7 +147,7 @@ import seaborn as sns
 
 def savefig(ax, name):
     """Save the current figure taking into account legends."""
-    lgd = ax.legend()
+    lgd = ax.get_legend()
     if lgd is not None:
         plt.savefig(name, bbox_inches='tight', bbox_extra_artists=(lgd,))
     else:
