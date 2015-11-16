@@ -276,3 +276,16 @@ def load_object(filename):
     obj = pickle.load(f)
     f.close()
     return obj
+
+#------------- Sorting ---------------
+def get_top(obj_dict, max_count):
+    """
+    Sorts the keys in a dictionary based on the values and 
+    returns the top max_count keys as a list. Useful in implementing search 
+    algorithms
+    """
+    sorted_list = sorted(obj_dict.keys(), key=obj_dict.get, reverse=True)
+    if len(obj_dict) <= max_count:
+        return sorted_list
+    else:
+        return sorted_list[0:max_count]
