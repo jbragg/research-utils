@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from gears.lang import preprocess
+from lang import preprocess
 
 
 def test_remove_html_entities():
