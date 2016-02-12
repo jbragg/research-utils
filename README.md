@@ -1,6 +1,8 @@
-# research-utils
-Useful utilities
+# Gears
+UW CSE Crowdlab's shared python utilities
 
-In order to add this project as a python submodule, you must use a command like
-`git submodule add https://github.com/jbragg/research-utils.git --name research_utils` to ensure
-the submodule name does not contain a hyphen (this makes importing difficult).
+## Using as submodule
+In order to add this project as a python submodule in your project, use
+
+	$ git submodule add https://github.com/jbragg/research-utils.git gears
+
