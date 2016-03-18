@@ -7,8 +7,11 @@ General utilities
 from __future__ import division
 import os
 import sys
+import warnings
 
 def get_or_default(d, k, default_v):
+    warnings.warn("Don't use this function anymore. Use dict.get(), which does the same thing.",
+                  DeprecationWarning)
     try:
         return d[k]
     except KeyError:
