@@ -49,6 +49,7 @@ def tsplot_robust(df, time, unit, condition, value, ci=95,
     """
     import pandas as pd
     import seaborn as sns
+    import scipy.stats as ss
     n = df.groupby([condition, time])[value].count()
     n.name = 'n'
     means = df.groupby([condition, time])[value].mean()
